@@ -1,20 +1,21 @@
-name: hello workflow
+
+name: Hello Workflow
 
 on:
-    push:
+  push:
 
 jobs:
-    hello:
-        runs on: ubuntu-latest
+  hello:
+    runs-on: ubuntu-latest
 
-        steps:
-            -uses: actions/checkout@v4
+    steps:
+      - uses: actions/checkout@v4
 
-            -name: say hello
-            run: echo "hello from github actions"
+      - name: Say Hello
+        run: echo "Hello from GitHub Actions!"
 
-            -name: show current directory
-            run: pwd
+      - name: Show Current Directory
+        run: pwd
 
-            -name: List files
-           run: ls -la
+      - name: List Files
+        run: ls -la
