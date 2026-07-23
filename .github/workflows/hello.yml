@@ -14,6 +14,12 @@ jobs:
       - name: Say Hello
         run: echo "Hello from GitHub Actions!"
 
+      - name: show date
+        run: date
+
+      - name: show Current user
+        run: whooami
+
       - name: Show Current Directory
         run: pwd
 
