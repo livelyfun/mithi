@@ -18,7 +18,13 @@ jobs:
         run: date
 
       - name: show Current user
-        run: whooami
+        run: whoami
+
+      - name: print git version
+        run: git --version
+
+      - name: system information
+        run: uname -a
 
       - name: Show Current Directory
         run: pwd
