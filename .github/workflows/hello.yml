@@ -1,0 +1,20 @@
+name: hello workflow
+
+on:
+    push:
+
+jobs:
+    hello:
+        runs on: ubuntu-latest
+
+        steps:
+            -uses: actions/checkout@v4
+
+            -name: say hello
+            run: echo "hello from github actions"
+
+            -name: show current directory
+            run: pwd
+
+            -name: List files
+           run: ls -la
