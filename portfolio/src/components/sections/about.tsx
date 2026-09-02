@@ -10,9 +10,7 @@ import { about } from "@/lib/site";
 const focusIcons = [Server, Layout, Terminal, Sparkles];
 
 export default function About() {
-  const [workspaceImg, setWorkspaceImg] = useState(
-    "https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=900&q=80"
-  );
+  const [workspaceImg, setWorkspaceImg] = useState("/images/profile.jpg");
 
   return (
     <Section
@@ -27,17 +25,14 @@ export default function About() {
           <div className="surface relative overflow-hidden rounded-3xl p-4 shadow-soft border border-border">
             {/* Supporting illustration / developer workspace image */}
             <div className="relative aspect-[4/3] w-full overflow-hidden rounded-2xl bg-muted/10 border border-border">
-              {/* TODO: replace placeholder image: About section visual / workspace illustration */}
               <Image
                 src={workspaceImg}
-                alt="Developer workspace and coding environment"
+                alt="Mithlesh Kumar Das, Backend & Full-Stack Developer"
                 fill
                 sizes="(max-width: 1024px) 100vw, 400px"
                 className="object-cover transition-transform duration-700 hover:scale-105"
                 onError={() =>
-                  setWorkspaceImg(
-                    "https://picsum.photos/seed/mithlesh-workspace/800/600"
-                  )
+                  setWorkspaceImg("/images/profile.jpg")
                 }
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />

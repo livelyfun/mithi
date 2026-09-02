@@ -19,10 +19,9 @@ export const profile = {
   linkedin: "https://linkedin.com/in/mithi",
   resumeUrl: "/Mithlesh_Kumar_Das_CV.pdf",
   availableForHire: true,
-  // Placeholder avatar
-  avatarUrl:
-    "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=600&q=80",
-  avatarFallback: "https://i.pravatar.cc/400?u=mithlesh-kumar-das",
+  // Profile photo
+  avatarUrl: "/images/profile.jpg",
+  avatarFallback: "/images/profile.jpg",
 };
 
 export const about = {

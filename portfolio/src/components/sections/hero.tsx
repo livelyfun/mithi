@@ -161,10 +161,9 @@ export default function Hero() {
               <div className="surface relative overflow-hidden rounded-3xl p-5 shadow-soft border border-border">
                 {/* Photo container */}
                 <div className="relative aspect-[4/5] w-full overflow-hidden rounded-2xl bg-muted/10 border border-border">
-                  {/* TODO: replace placeholder image: Hero headshot - replace with real portrait photo */}
                   <Image
                     src={imgSrc}
-                    alt={`${profile.name} - ${profile.role}`}
+                    alt={`${profile.name}, Backend & Full-Stack Developer`}
                     fill
                     sizes="(max-width: 768px) 100vw, 380px"
                     priority
