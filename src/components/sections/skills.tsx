@@ -235,7 +235,7 @@ export default function Skills() {
             delay={(idx % 6) * 0.06}
             threshold={0.08}
           >
-            <div className="group relative flex h-full flex-col justify-between rounded-2xl border border-border bg-card/50 p-5 transition-all duration-300 hover:border-accent/50 hover:bg-card hover:-translate-y-1 hover:shadow-soft">
+            <div className="group relative flex h-full flex-col justify-between rounded-2xl border border-border/80 bg-card/75 backdrop-blur-md p-5 transition-all duration-300 hover:border-accent/50 hover:bg-card hover:-translate-y-1 hover:shadow-soft">
               <div>
                 {/* Header: Skill Name & Category */}
                 <div className="flex items-start justify-between gap-3">

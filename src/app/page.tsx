@@ -13,6 +13,7 @@ import Experience from "@/components/sections/experience";
 import ResumeSection from "@/components/sections/resume";
 import Contact from "@/components/sections/contact";
 import DevTerminal from "@/components/dev-terminal";
+import SpatialHUD from "@/components/spatial-hud";
 import ProjectModal from "@/components/project-modal";
 import GlobalBackgroundScene from "@/components/three/global-background-scene";
 import { projects, type Project } from "@/lib/site";
@@ -55,6 +56,9 @@ export default function Home() {
 
       {/* Interactive Developer CLI Shell */}
       <DevTerminal onInspectProject={(p) => setActiveProject(p)} />
+
+      {/* Global 3D Spatial Telemetry HUD & Sector Controller */}
+      <SpatialHUD />
 
       {/* Global 3D Project Workbench Modal */}
       {activeProject && (

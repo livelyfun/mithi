@@ -4,6 +4,7 @@ import { useEffect, useRef, useState, useCallback } from "react";
 import * as THREE from "three";
 import { Eye, RotateCw, Pause, Play, Cpu, Layers, Network } from "lucide-react";
 import { projects } from "@/lib/site";
+import { SPATIAL_SKILLS, createSkillBadgeTexture } from "@/lib/skill-textures";
 
 interface DevSpatialViewportProps {
   onSelectProject?: (projectId: string) => void;
@@ -252,6 +253,40 @@ export default function DevSpatialViewport({
       linesGroup.add(line);
     });
 
+    // 2.5 3D Skill Icon Badges in Spatial Orbit (Python, React, Next, TS, FastAPI, Docker)
+    const skillNodesGroup = new THREE.Group();
+    scene.add(skillNodesGroup);
+
+    const viewportSkills = SPATIAL_SKILLS.slice(0, 6);
+    const skillSpritesList: { sprite: THREE.Sprite; angle: number; radius: number; speed: number; y: number }[] = [];
+
+    viewportSkills.forEach((skill, idx) => {
+      const angle = (idx / viewportSkills.length) * Math.PI * 2;
+      const radius = 3.7;
+      const y = (idx % 2 === 0 ? 1.05 : -1.05) + (idx % 3 === 0 ? 0.35 : -0.35);
+
+      const texture = createSkillBadgeTexture(skill);
+      const spriteMat = new THREE.SpriteMaterial({
+        map: texture,
+        transparent: true,
+        opacity: 0.95,
+        depthWrite: false,
+      });
+      const sprite = new THREE.Sprite(spriteMat);
+      sprite.scale.set(1.35, 0.49, 1);
+      sprite.position.set(Math.cos(angle) * radius, y, Math.sin(angle) * radius);
+      sprite.userData = { id: skill.id, name: `${skill.name} · ${skill.tagline}` };
+      skillNodesGroup.add(sprite);
+
+      skillSpritesList.push({
+        sprite,
+        angle,
+        radius,
+        speed: 0.18 + (idx % 2) * 0.04,
+        y,
+      });
+    });
+
     // 3. Ambient Code Particles Field
     const particleCount = 280;
     const particlePositions = new Float32Array(particleCount * 3);
@@ -313,12 +348,15 @@ export default function DevSpatialViewport({
       mouseRef.current.targetX = mouseVector.x * 0.45;
       mouseRef.current.targetY = mouseVector.y * 0.35;
 
-      // Detect hover on project nodes
+      // Detect hover on project nodes & skill badges
       raycaster.setFromCamera(mouseVector, camera);
-      const intersects = raycaster.intersectObjects(nodesGroup.children, true);
+      const intersects = raycaster.intersectObjects(
+        [...nodesGroup.children, ...skillNodesGroup.children],
+        true
+      );
       if (intersects.length > 0) {
         let root = intersects[0].object;
-        while (root.parent && root.parent !== nodesGroup) {
+        while (root.parent && root.parent !== nodesGroup && root.parent !== skillNodesGroup) {
           root = root.parent;
         }
         if (root.userData?.name) {
@@ -473,6 +511,18 @@ export default function DevSpatialViewport({
         }
       }
 
+      // Orbiting 3D Skill Badge Sprites
+      if (skillNodesGroup) {
+        skillSpritesList.forEach((item) => {
+          if (isRotatingRef.current) {
+            item.angle += delta * item.speed;
+          }
+          item.sprite.position.x = Math.cos(item.angle) * item.radius;
+          item.sprite.position.z = Math.sin(item.angle) * item.radius;
+          item.sprite.position.y = item.y + Math.sin(time * 1.4 + item.angle) * 0.12;
+        });
+      }
+
       // Particle cloud gentle rotation
       if (particles) {
         particles.rotation.y = time * 0.05;
@@ -495,7 +545,12 @@ export default function DevSpatialViewport({
 
       // Dispose geometries & materials
       scene.traverse((obj) => {
-        if (obj instanceof THREE.Mesh || obj instanceof THREE.Line || obj instanceof THREE.Points) {
+        if (
+          obj instanceof THREE.Mesh ||
+          obj instanceof THREE.Line ||
+          obj instanceof THREE.Points ||
+          obj instanceof THREE.Sprite
+        ) {
           if (obj.geometry) obj.geometry.dispose();
           if (Array.isArray(obj.material)) {
             obj.material.forEach((m) => m.dispose());
