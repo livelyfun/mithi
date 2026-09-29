@@ -538,9 +538,9 @@ export default function GlobalBackgroundScene() {
       aria-hidden="true"
       className="pointer-events-none fixed inset-0 z-0 overflow-hidden"
     >
-      {/* Visual Scrim Overlay ensuring 100% text readability and contrast across all portfolio cards */}
-      <div className="absolute inset-0 bg-gradient-to-b from-background/70 via-background/45 to-background/80 pointer-events-none" />
-      <div className="absolute inset-0 bg-radial from-transparent via-background/25 to-background/60 pointer-events-none" />
+      {/* Visual Scrim Overlay tuned for rich 3D visibility and sharp text readability */}
+      <div className="absolute inset-0 bg-gradient-to-b from-background/40 via-background/20 to-background/60 pointer-events-none" />
+      <div className="absolute inset-0 bg-radial from-transparent via-background/15 to-background/50 pointer-events-none" />
     </div>
   );
 }
