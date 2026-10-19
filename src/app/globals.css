@@ -4,43 +4,43 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 :root {
-  /* Light theme tokens */
-  --background: #f8fafc;
-  --background-2: #f1f5f9;
-  --foreground: #090d16;
-  --foreground-muted: #334155;
-  --card: #ffffff;
-  --card-solid: #ffffff;
-  --muted: #64748b;
-  --border: rgba(15, 23, 42, 0.08);
-  --border-strong: rgba(15, 23, 42, 0.16);
-  --accent: #4f46e5;
-  --accent-2: #0284c7;
-  --ring: rgba(79, 70, 229, 0.25);
-  --surface-gradient: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
-  --badge-bg: rgba(79, 70, 229, 0.06);
+  /* Light theme — refined pastel studio (cream + ink) */
+  --background: #faf4e5;
+  --background-2: #f5edd8;
+  --foreground: #333332;
+  --foreground-muted: #5c5a52;
+  --card: rgba(255, 251, 242, 0.72);
+  --card-solid: #fffaf0;
+  --muted: #7a7568;
+  --border: rgba(51, 51, 50, 0.1);
+  --border-strong: rgba(51, 51, 50, 0.18);
+  --accent: #c96f7e;
+  --accent-2: #5f73b8;
+  --ring: rgba(201, 111, 126, 0.3);
+  --surface-gradient: linear-gradient(180deg, #fffaf0 0%, #faf4e5 100%);
+  --badge-bg: rgba(201, 111, 126, 0.08);
 }
 
 .dark {
-  /* Dark theme tokens (default 2026 obsidian palette) */
-  --background: #090d16;
-  --background-2: #0f1626;
-  --foreground: #f8fafc;
-  --foreground-muted: #cbd5e1;
-  --card: rgba(15, 23, 42, 0.65);
-  --card-solid: #0f172a;
-  --muted: #94a3b8;
-  --border: rgba(255, 255, 255, 0.08);
-  --border-strong: rgba(255, 255, 255, 0.16);
-  --accent: #818cf8;
-  --accent-2: #38bdf8;
-  --ring: rgba(129, 140, 248, 0.35);
+  /* Dark theme — deep navy studio night */
+  --background: #0d1424;
+  --background-2: #111a2e;
+  --foreground: #f5edd8;
+  --foreground-muted: #c3c9d8;
+  --card: rgba(17, 26, 46, 0.66);
+  --card-solid: #111a2e;
+  --muted: #8d96ad;
+  --border: rgba(245, 237, 216, 0.09);
+  --border-strong: rgba(245, 237, 216, 0.18);
+  --accent: #e5a1aa;
+  --accent-2: #8395CD;
+  --ring: rgba(229, 161, 170, 0.35);
   --surface-gradient: linear-gradient(
     180deg,
-    rgba(255, 255, 255, 0.04) 0%,
-    rgba(255, 255, 255, 0.015) 100%
+    rgba(245, 237, 216, 0.045) 0%,
+    rgba(245, 237, 216, 0.015) 100%
   );
-  --badge-bg: rgba(129, 140, 248, 0.1);
+  --badge-bg: rgba(229, 161, 170, 0.1);
 }
 
 @theme inline {
@@ -85,17 +85,17 @@ body::before {
   background:
     radial-gradient(
       55rem 35rem at 85% -5%,
-      rgba(99, 102, 241, 0.09),
+      rgba(229, 161, 170, 0.08),
       transparent 60%
     ),
     radial-gradient(
       45rem 30rem at 10% 30%,
-      rgba(56, 189, 248, 0.06),
+      rgba(131, 149, 205, 0.07),
       transparent 60%
     ),
     radial-gradient(
       50rem 40rem at 50% 80%,
-      rgba(99, 102, 241, 0.05),
+      rgba(122, 208, 172, 0.05),
       transparent 65%
     ),
     var(--background);
@@ -215,6 +215,34 @@ body::before {
   box-shadow: 0 10px 32px -8px var(--ring);
 }
 
+/* Studio section card — soft glass surface with oversized curvature */
+.section-card {
+  position: relative;
+  background: var(--card);
+  backdrop-filter: blur(18px) saturate(135%);
+  -webkit-backdrop-filter: blur(18px) saturate(135%);
+  border: 1px solid var(--border);
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.06) inset,
+    0 24px 60px -28px rgba(0, 0, 0, 0.45);
+}
+
+.dark .section-card {
+  box-shadow:
+    0 1px 0 rgba(245, 237, 216, 0.05) inset,
+    0 28px 70px -30px rgba(0, 0, 0, 0.85);
+}
+
+.section-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  background: var(--surface-gradient);
+  opacity: 0.7;
+}
+
 /* Grid & texture utilities */
 .bg-grid {
   background-image:
@@ -243,7 +271,7 @@ body::before {
   border-radius: 9999px;
   font-weight: 600;
   color: #ffffff;
-  background: linear-gradient(135deg, var(--accent), #4338ca);
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
   box-shadow:
     0 1px 0 rgba(255, 255, 255, 0.2) inset,
     0 12px 28px -8px var(--ring);

@@ -1,4 +1,31 @@
+# dependencies
+/node_modules
+/.pnp
+.pnp.js
+
+# next.js
+/.next/
+/out/
+
+# production
+/build
+
+# misc
+.DS_Store
+*.pem
 tp.py
 
-# Local Netlify folder
+# debug
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# local env files
+.env*.local
+
+# vercel & netlify
+.vercel
 .netlify
+
+# typescript
+*.tsbuildinfo

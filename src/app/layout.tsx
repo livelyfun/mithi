@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Inter, Geist_Mono, Space_Grotesk } from "next/font/google";
+import { ThemeProvider } from "@/components/studio/theme-context";
 import "./globals.css";
 
 const inter = Inter({
@@ -19,34 +20,35 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Mithlesh Kumar Das — Backend & Full-Stack Developer",
+  title: "Mithlesh Kumar Das — Full-Stack & AI Engineering Developer",
   description:
-    "Portfolio of Mithlesh Kumar Das, an entry-level backend and full-stack developer skilled in Python, JavaScript, React.js, Next.js, Firebase, and GraphQL.",
+    "Portfolio of Mithlesh Kumar Das, a software developer in Biratnagar, Nepal — full-stack web apps, backend systems, and AI/RAG tooling with Python, Next.js, TypeScript, and Qdrant.",
   keywords: [
     "Mithlesh Kumar Das",
     "full-stack developer",
     "backend developer",
+    "AI engineering",
+    "RAG",
     "React",
     "Next.js",
     "Python",
     "Firebase",
-    "GraphQL",
     "portfolio",
   ],
   authors: [{ name: "Mithlesh Kumar Das" }],
   openGraph: {
-    title: "Mithlesh Kumar Das — Backend & Full-Stack Developer",
+    title: "Mithlesh Kumar Das — Full-Stack & AI Engineering Developer",
     description:
-      "Portfolio of Mithlesh Kumar Das, an entry-level backend and full-stack developer skilled in Python, JavaScript, React.js, Next.js, Firebase, and GraphQL.",
+      "Portfolio of Mithlesh Kumar Das, a software developer building full-stack products, backend systems, and AI/RAG tooling.",
     type: "website",
     locale: "en_US",
     siteName: "Mithlesh Kumar Das",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Mithlesh Kumar Das — Backend & Full-Stack Developer",
+    title: "Mithlesh Kumar Das — Full-Stack & AI Engineering Developer",
     description:
-      "Portfolio of Mithlesh Kumar Das, an entry-level backend and full-stack developer skilled in Python, JavaScript, React.js, Next.js, Firebase, and GraphQL.",
+      "Portfolio of Mithlesh Kumar Das, a software developer building full-stack products, backend systems, and AI/RAG tooling.",
   },
 };
 
@@ -74,7 +76,7 @@ export default function RootLayout({
         suppressHydrationWarning
         className={`${inter.variable} ${spaceGrotesk.variable} ${geistMono.variable} antialiased`}
       >
-        {children}
+        <ThemeProvider>{children}</ThemeProvider>
       </body>
     </html>
   );

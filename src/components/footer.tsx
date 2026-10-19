@@ -2,7 +2,7 @@
 
 import { ArrowUp } from "lucide-react";
 import { profile, navLinks } from "@/lib/site";
-import { GitHubIcon, LinkedInIcon } from "./icons";
+import { GitHubIcon, LinkedInIcon, XTwitterIcon } from "./icons";
 
 export default function Footer() {
   function scrollToTop() {
@@ -62,6 +62,15 @@ export default function Footer() {
                 className="flex size-8 items-center justify-center rounded-lg border border-border bg-card text-muted transition-colors hover:text-foreground hover:border-accent/40"
               >
                 <LinkedInIcon className="size-3.5" />
+              </a>
+              <a
+                href={profile.twitter}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="X (Twitter)"
+                className="flex size-8 items-center justify-center rounded-lg border border-border bg-card text-muted transition-colors hover:text-foreground hover:border-accent/40"
+              >
+                <XTwitterIcon className="size-3.5" />
               </a>
             </div>
 

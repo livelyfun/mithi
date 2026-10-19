@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Menu, X, FileDown, ArrowUpRight, Terminal } from "lucide-react";
+import { Menu, X, FileDown, ArrowUpRight } from "lucide-react";
 import { navLinks, profile } from "@/lib/site";
 import ThemeToggle from "./theme-toggle";
 import { cn } from "@/lib/utils";
@@ -36,11 +36,6 @@ export default function Navbar() {
     sections.forEach((s) => observer.observe(s));
     return () => observer.disconnect();
   }, []);
-
-  const openTerminal = () => {
-    // Trigger global key event for backtick to open DevTerminal
-    window.dispatchEvent(new KeyboardEvent("keydown", { key: "`" }));
-  };
 
   return (
     <header className="fixed inset-x-0 top-0 z-50 px-4 pt-3.5 sm:px-6">
@@ -108,23 +103,8 @@ export default function Navbar() {
           })}
         </nav>
 
-        {/* Right Action Tools: Terminal Launcher, CV Download, Theme Toggle */}
+        {/* Right Action Tools: CV Download, Theme Toggle */}
         <div className="hidden items-center gap-2 md:flex">
-          {/* CLI Terminal Launcher Button */}
-          <button
-            type="button"
-            onClick={openTerminal}
-            title="Open Developer Shell (`)"
-            aria-label="Open developer terminal shell"
-            className="flex items-center gap-1.5 rounded-xl border border-border bg-card/80 px-2.5 py-1.5 font-mono text-xs text-muted transition-colors hover:border-accent hover:text-accent"
-          >
-            <Terminal className="size-3.5 text-accent" />
-            <span className="text-[11px]">Shell</span>
-            <kbd className="rounded-sm border border-border bg-muted/15 px-1 py-0.2 text-[9px] text-muted">
-              `
-            </kbd>
-          </button>
-
           {/* CV Button */}
           <a
             href={profile.resumeUrl}
@@ -141,14 +121,6 @@ export default function Navbar() {
 
         {/* Mobile controls */}
         <div className="flex items-center gap-1.5 md:hidden">
-          <button
-            type="button"
-            onClick={openTerminal}
-            aria-label="Open CLI shell"
-            className="flex size-8 items-center justify-center rounded-xl border border-border text-accent"
-          >
-            <Terminal className="size-3.5" />
-          </button>
           <a
             href={profile.resumeUrl}
             target="_blank"
