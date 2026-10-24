@@ -12,6 +12,7 @@ export default class Controls {
         this.resources = this.experience.resources;
         this.time = this.experience.time;
         this.camera = this.experience.camera;
+        this.sound = this.experience.sound;
         this.room = this.experience.world.room.actualRoom;
         this.room.children.forEach((child) => {
             if (child.type === "RectAreaLight") {
@@ -305,6 +306,24 @@ export default class Controls {
                             pinSpacing: false,
                         },
                     });
+
+                    ScrollTrigger.create({
+                        trigger: section,
+                        start: "top center",
+                        end: "bottom center",
+                        onEnter: () => {
+                            this.sound.play("whoosh-soft", {
+                                rate: 1,
+                                gap: 800,
+                            });
+                        },
+                        onEnterBack: () => {
+                            this.sound.play("whoosh-soft", {
+                                rate: 0.85,
+                                gap: 800,
+                            });
+                        },
+                    });
                 });
 
                 // All animations
@@ -376,6 +395,10 @@ export default class Controls {
                             x: -5.44055,
                             z: 13.6135,
                             duration: 0.3,
+                            onStart: () =>
+                                this.sound.play("whoosh-soft", {
+                                    volume: 0.5,
+                                }),
                         });
                     }
                     if (child.name === "Mailbox") {
@@ -384,6 +407,7 @@ export default class Controls {
                             y: 1,
                             z: 1,
                             duration: 0.3,
+                            onStart: () => this.sound.play("ding"),
                         });
                     }
                     if (child.name === "Lamp") {
@@ -393,6 +417,8 @@ export default class Controls {
                             z: 1,
                             ease: "back.out(2)",
                             duration: 0.3,
+                            onStart: () =>
+                                this.sound.play("click", { rate: 1.3 }),
                         });
                     }
                     if (child.name === "FloorFirst") {
@@ -402,6 +428,8 @@ export default class Controls {
                             z: 1,
                             ease: "back.out(2)",
                             duration: 0.3,
+                            onStart: () =>
+                                this.sound.play("pop", { rate: 1 }),
                         });
                     }
                     if (child.name === "FloorSecond") {
@@ -410,6 +438,8 @@ export default class Controls {
                             y: 1,
                             z: 1,
                             duration: 0.3,
+                            onStart: () =>
+                                this.sound.play("pop", { rate: 1.12 }),
                         });
                     }
                     if (child.name === "FloorThird") {
@@ -419,6 +449,8 @@ export default class Controls {
                             z: 1,
                             ease: "back.out(2)",
                             duration: 0.3,
+                            onStart: () =>
+                                this.sound.play("pop", { rate: 1.26 }),
                         });
                     }
                     if (child.name === "Dirt") {
@@ -428,6 +460,8 @@ export default class Controls {
                             z: 1,
                             ease: "back.out(2)",
                             duration: 0.3,
+                            onStart: () =>
+                                this.sound.play("pop", { rate: 0.6 }),
                         });
                     }
                     if (child.name === "Flower1") {
@@ -437,6 +471,8 @@ export default class Controls {
                             z: 1,
                             ease: "back.out(2)",
                             duration: 0.3,
+                            onStart: () =>
+                                this.sound.play("sparkle", { rate: 1 }),
                         });
                     }
                     if (child.name === "Flower2") {
@@ -446,6 +482,8 @@ export default class Controls {
                             z: 1,
                             ease: "back.out(2)",
                             duration: 0.3,
+                            onStart: () =>
+                                this.sound.play("sparkle", { rate: 1.25 }),
                         });
                     }
                 });

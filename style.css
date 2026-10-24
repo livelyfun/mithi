@@ -529,3 +529,48 @@ svg{
   }
 }
 
+
+/* Sound Button --------------------------------------------- */
+.sound-button{
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  margin-right: 16px;
+  color: var(--color-background);
+  background-color: var(--color-pink);
+  border: none;
+  border-radius: 50%;
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+  transition: transform 0.2s ease-in-out, background-color 0.5s;
+}
+
+.sound-button:hover{
+  transform: scale(0.94);
+}
+
+.sound-button:focus,
+.sound-button:focus-visible{
+  outline: 3px solid var(--color-blue);
+  outline-offset: 3px;
+}
+
+.sound-button svg{
+  width: 18px;
+  height: 18px;
+}
+
+.sound-button .sound-off-icon{
+  display: none;
+}
+
+.sound-button.off .sound-on-icon{
+  display: none;
+}
+
+.sound-button.off .sound-off-icon{
+  display: block;
+}
