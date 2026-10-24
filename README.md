@@ -4,7 +4,7 @@ An interactive 3D room portfolio built with **Three.js**, **Vite**, **GSAP** and
 
 Scroll down and the camera moves through a hand-built 3D room while the About, Projects, Skills and Contact sections slide in over it.
 
-- **Live:** https://3d-portfolio-black-seven.vercel.app/
+- **Live:** https://mithi-rho.vercel.app/
 - **GitHub:** https://github.com/livelyfun
 - **LinkedIn:** https://www.linkedin.com/in/mithlesh-das-876973343/
 - **Email:** mithleshkumardas527@gmail.com
