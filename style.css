@@ -530,47 +530,6 @@ svg{
 }
 
 
-/* Sound Gate --------------------------------------------- */
-.sound-gate{
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-  align-items: center;
-}
-
-.gate-button{
-  cursor: pointer;
-  min-width: 220px;
-  padding: 14px 28px;
-  font-family: inherit;
-  font-size: 15px;
-  font-weight: 600;
-  color: var(--color-text-light);
-  background-color: var(--color-background-light);
-  border: 2px solid var(--color-pink-light);
-  border-radius: 999px;
-  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
-  transition: transform 0.2s ease, background-color 0.2s ease, color 0.2s ease;
-}
-
-.gate-button:hover{
-  background-color: var(--color-pink-light);
-  color: var(--color-background-light);
-  transform: translateY(-1px);
-}
-
-.gate-button.selected{
-  background-color: var(--color-text-light);
-  border-color: var(--color-text-light);
-  color: var(--color-background-light);
-}
-
-.gate-button:focus,
-.gate-button:focus-visible{
-  outline: 3px solid var(--color-blue-light);
-  outline-offset: 3px;
-}
-
 /* Sound Button --------------------------------------------- */
 .sound-button{
   cursor: pointer;
@@ -614,12 +573,4 @@ svg{
 
 .sound-button.off .sound-off-icon{
   display: block;
-}
-
-@media (max-width: 968px){
-  .gate-button{
-    min-width: 190px;
-    padding: 12px 22px;
-    font-size: 14px;
-  }
 }

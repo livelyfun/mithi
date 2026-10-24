@@ -1,11 +1,11 @@
 import { EventEmitter } from "events";
 import GSAP from "gsap";
-import { Howl } from "howler";
+import { Howl, Howler } from "howler";
 
 import Experience from "./Experience.js";
 import sounds from "./Utils/sounds.js";
 
-const STORAGE_KEY = "sound-preference";
+const STORAGE_KEY = "sound-enabled";
 const MAX_SFX = 8;
 const HOVER_QUERY = "(hover: hover) and (pointer: fine)";
 
@@ -18,6 +18,7 @@ export default class SoundManager extends EventEmitter {
         this.definitions = {};
         this.howls = {};
         this.failed = {};
+        this.retried = {};
         this.lastPlayed = {};
         this.active = 0;
         this.lastThemeSound = 0;
@@ -40,6 +41,9 @@ export default class SoundManager extends EventEmitter {
             ? window.matchMedia(HOVER_QUERY)
             : null;
         this.canHover = this.hoverMedia ? this.hoverMedia.matches : false;
+
+        this.gestureEvents = ["pointerdown", "keydown", "wheel", "touchstart"];
+        this.onFirstGesture = this.onFirstGesture.bind(this);
 
         this.updateButton();
         this.setEventListeners();
@@ -64,10 +68,6 @@ export default class SoundManager extends EventEmitter {
         }
     }
 
-    getStoredPreference() {
-        return this.storedPreference;
-    }
-
     savePreference(enabled) {
         this.storedPreference = enabled;
         try {
@@ -89,6 +89,11 @@ export default class SoundManager extends EventEmitter {
         this.savePreference(true);
         this.updateButton();
         this.load();
+
+        if (Howler.ctx && Howler.ctx.state === "suspended") {
+            Howler.ctx.resume();
+        }
+
         this.startMusic();
         this.startNight();
     }
@@ -214,18 +219,45 @@ export default class SoundManager extends EventEmitter {
             pool: definition.group === "sfx" ? MAX_SFX : 1,
             preload: true,
             onloaderror: () => {
-                this.fail(definition.id);
+                this.fail(definition.id, true);
             },
             onplayerror: () => {
-                this.fail(definition.id);
+                this.fail(definition.id, false);
             },
         });
     }
 
-    fail(id) {
+    fail(id, allowFallback) {
         if (this.failed[id]) {
             return;
         }
+
+        const definition = this.definitions[id];
+        if (
+            allowFallback &&
+            definition &&
+            definition.fallback &&
+            !this.retried[id]
+        ) {
+            this.retried[id] = true;
+            const retry = this.create({
+                ...definition,
+                file: definition.fallback,
+                fallback: null,
+            });
+
+            if (definition.group === "music") {
+                this.music = retry;
+                this.startMusic();
+            } else if (definition.group === "ambience") {
+                this.night = retry;
+                this.startNight();
+            } else {
+                this.howls[id] = retry;
+            }
+            return;
+        }
+
         this.failed[id] = true;
         console.warn(
             `[SoundManager] Could not load "${id}". Skipping that sound.`
@@ -380,11 +412,43 @@ export default class SoundManager extends EventEmitter {
             this.onVisibilityChange()
         );
 
+        this.gestureEvents.forEach((name) => {
+            document.addEventListener(name, this.onFirstGesture, {
+                capture: true,
+                passive: true,
+            });
+        });
+
         if (this.hoverMedia && this.hoverMedia.addEventListener) {
             this.hoverMedia.addEventListener("change", (event) => {
                 this.canHover = event.matches;
             });
         }
+    }
+
+    onFirstGesture(event) {
+        // Browsers block audio until a user gesture. Start on the first
+        // click, key press, scroll, or tap unless the visitor saved "off".
+        this.removeGestureListeners();
+
+        const target = event.target;
+        if (target instanceof Element && target.closest(".sound-button")) {
+            return;
+        }
+
+        if (this.storedPreference === false) {
+            return;
+        }
+
+        this.enable();
+    }
+
+    removeGestureListeners() {
+        this.gestureEvents.forEach((name) => {
+            document.removeEventListener(name, this.onFirstGesture, {
+                capture: true,
+            });
+        });
     }
 
     onClick(event) {
@@ -393,7 +457,7 @@ export default class SoundManager extends EventEmitter {
             return;
         }
 
-        if (target.closest(".gate-button, .toggle-button, .sound-button")) {
+        if (target.closest(".toggle-button, .sound-button")) {
             return;
         }
 
@@ -417,7 +481,7 @@ export default class SoundManager extends EventEmitter {
             return;
         }
 
-        if (target.closest(".gate-button, .toggle-button, .sound-button")) {
+        if (target.closest(".toggle-button, .sound-button")) {
             return;
         }
 

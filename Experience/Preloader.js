@@ -14,8 +14,6 @@ export default class Preloader extends EventEmitter {
         this.world = this.experience.world;
         this.device = this.sizes.device;
         this.sound = this.experience.sound;
-        this.loading = document.querySelector(".loading");
-        this.gate = document.querySelector(".sound-gate");
 
         this.sizes.on("switchdevice", (device) => {
             this.device = device;
@@ -23,7 +21,7 @@ export default class Preloader extends EventEmitter {
 
         this.world.on("worldready", () => {
             this.setAssets();
-            this.showGate();
+            this.playIntro();
         });
     }
 
@@ -37,62 +35,6 @@ export default class Preloader extends EventEmitter {
         this.room = this.experience.world.room.actualRoom;
         this.roomChildren = this.experience.world.room.roomChildren;
         console.log(this.roomChildren);
-    }
-
-    showGate() {
-        if (!this.gate) {
-            this.playIntro();
-            return;
-        }
-
-        if (this.loading) {
-            this.loading.classList.add("hidden");
-        }
-        this.gate.classList.remove("hidden");
-        this.selectGateChoice();
-
-        this.gateClick = this.onGateClick.bind(this);
-        this.gate.addEventListener("click", this.gateClick);
-    }
-
-    selectGateChoice() {
-        const stored = this.sound.getStoredPreference();
-        let focused = null;
-
-        this.gate.querySelectorAll(".gate-button").forEach((button) => {
-            const value = button.dataset.sound === "on";
-            const selected = stored !== null && value === stored;
-            button.classList.toggle("selected", selected);
-            if (selected) {
-                focused = button;
-            }
-        });
-
-        if (!focused) {
-            focused = this.gate.querySelector(".gate-button");
-        }
-        if (focused) {
-            focused.focus({ preventScroll: true });
-        }
-    }
-
-    onGateClick(event) {
-        const button = event.target.closest(".gate-button");
-        if (!button) {
-            return;
-        }
-
-        this.gate.removeEventListener("click", this.gateClick);
-
-        if (button.dataset.sound === "on") {
-            this.sound.enable();
-            this.sound.play("click", { allowLoading: true });
-        } else {
-            this.sound.disable();
-        }
-
-        this.gate.classList.add("hidden");
-        this.playIntro();
     }
 
     firstIntro() {
