@@ -84,6 +84,30 @@ export default class Controls {
 
     setSmoothScroll() {
         this.asscroll = this.setupASScroll();
+        this.observeContentResize();
+    }
+
+    observeContentResize() {
+        const pageWrapper = document.querySelector(".page-wrapper");
+        if (!pageWrapper || typeof ResizeObserver === "undefined") {
+            return;
+        }
+
+        // Lazy-loaded images, fonts and content changes can make the page
+        // taller after ASScroll has calculated its maximum. Recalculate so
+        // the footer never becomes unreachable.
+        this.contentResizeObserver = new ResizeObserver(() => {
+            if (this.refreshScheduled) {
+                return;
+            }
+
+            this.refreshScheduled = true;
+            window.setTimeout(() => {
+                this.refreshScheduled = false;
+                ScrollTrigger.refresh();
+            }, 100);
+        });
+        this.contentResizeObserver.observe(pageWrapper);
     }
 
     setScrollTrigger() {
