@@ -13,7 +13,7 @@ total under about 300 KB and the music at or below 1.2 MB.
 
 | id | file | what it should sound like | target length / budget | source | license |
 |---|---|---|---|---|---|
-| music | music-main.webm + music-main.mp3 | cozy lo-fi/ambient, soft keys and pads, slow, no dominant drums, no vocals, loops seamlessly | 32s loop, <=1.2MB | Original synthesis (this project) | CC0 |
+| music | music-main.webm + music-main.mp3 | warm lo-fi keys, soft bass, brushed beat, vinyl texture, no vocals, loops seamlessly | 48s loop, <=1.2MB | Original synthesis (this project) | CC0 |
 | ambience-night | ambience-night.mp3 | soft crickets / night air | 24s loop, <=500KB | Original synthesis (this project) | CC0 |
 | click | ui-click.mp3 | soft, dry click | <0.15s | Original synthesis (this project) | CC0 |
 | hover | ui-hover.mp3 | barely-there tick | <0.08s | Original synthesis (this project) | CC0 |
@@ -34,7 +34,7 @@ These live in `Experience/Utils/sounds.js` so they can be tuned by ear.
 
 | id | volume |
 |---|---|
-| music | 0.22 |
+| music | 0.35 |
 | ambience-night | 0.15 |
 | click | 0.35 |
 | hover | 0.12 |

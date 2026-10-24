@@ -3,7 +3,7 @@ export default [
         id: "music",
         file: "/audio/music-main.webm",
         fallback: "/audio/music-main.mp3",
-        volume: 0.22,
+        volume: 0.35,
         group: "music",
         loop: true,
     },

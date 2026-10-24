@@ -5,7 +5,7 @@ import { Howl, Howler } from "howler";
 import Experience from "./Experience.js";
 import sounds from "./Utils/sounds.js";
 
-const STORAGE_KEY = "sound-enabled";
+const STORAGE_KEY = "sound-enabled-v2";
 const MAX_SFX = 8;
 const HOVER_QUERY = "(hover: hover) and (pointer: fine)";
 
@@ -28,6 +28,7 @@ export default class SoundManager extends EventEmitter {
         this.hidden = document.hidden;
         this.themeName = this.theme.theme;
         this.storedPreference = this.readPreference();
+        this.preferenceOn = this.storedPreference !== false;
 
         this.music = null;
         this.night = null;
@@ -80,6 +81,8 @@ export default class SoundManager extends EventEmitter {
     /* Public API --------------------------------------------------- */
 
     enable() {
+        this.preferenceOn = true;
+
         if (this.enabled) {
             this.startMusic();
             return;
@@ -99,6 +102,7 @@ export default class SoundManager extends EventEmitter {
     }
 
     disable() {
+        this.preferenceOn = false;
         this.enabled = false;
         this.savePreference(false);
         this.updateButton();
@@ -436,7 +440,7 @@ export default class SoundManager extends EventEmitter {
             return;
         }
 
-        if (this.storedPreference === false) {
+        if (!this.preferenceOn) {
             return;
         }
 
@@ -499,8 +503,9 @@ export default class SoundManager extends EventEmitter {
             return;
         }
 
-        this.soundButton.setAttribute("aria-pressed", String(this.enabled));
-        this.soundButton.classList.toggle("off", !this.enabled);
+        const on = this.enabled || this.preferenceOn;
+        this.soundButton.setAttribute("aria-pressed", String(on));
+        this.soundButton.classList.toggle("off", !on);
     }
 
     update() {
