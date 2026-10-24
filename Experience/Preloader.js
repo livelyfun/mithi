@@ -19,16 +19,90 @@ export default class Preloader extends EventEmitter {
             this.device = device;
         });
 
+        this.entryScreen = document.querySelector(".entry-screen");
+        this.loading = document.querySelector(".loading");
+        this.entryButtons = this.entryScreen
+            ? Array.from(this.entryScreen.querySelectorAll(".entry-button"))
+            : [];
         this.preloader = document.querySelector(".preloader");
         this.loaderDotsPlayed = false;
+        this.worldReady = false;
+        this.entered = false;
+        this.introStarted = false;
+        this.onEntryClick = this.onEntryClick.bind(this);
 
-        this.sound.on("enable", () => this.playLoaderDots());
-        this.sound.attemptAutoplay();
+        if (this.entryScreen) {
+            this.entryScreen.addEventListener("click", this.onEntryClick);
+            this.selectEntryChoice();
+        } else {
+            this.entered = true;
+        }
 
         this.world.on("worldready", () => {
+            this.worldReady = true;
             this.setAssets();
-            this.playIntro();
+            this.tryStartIntro();
         });
+    }
+
+    selectEntryChoice() {
+        const selected = this.entryButtons.find(
+            (button) => button.dataset.sound === "on"
+        );
+
+        if (selected) {
+            selected.classList.add("selected");
+            selected.focus({ preventScroll: true });
+        }
+    }
+
+    onEntryClick(event) {
+        const button = event.target.closest(".entry-button");
+        if (!button || this.entered) {
+            return;
+        }
+
+        this.entered = true;
+        this.entryScreen.removeEventListener("click", this.onEntryClick);
+        this.entryButtons.forEach((entryButton) => {
+            entryButton.disabled = true;
+        });
+
+        if (this.loading) {
+            this.loading.classList.remove("hidden");
+        }
+
+        const withSound = button.dataset.sound === "on";
+
+        if (withSound) {
+            this.sound.enable();
+            this.playLoaderDots();
+        } else {
+            this.sound.disable();
+        }
+
+        this.hideEntryScreen();
+        this.tryStartIntro();
+    }
+
+    hideEntryScreen() {
+        GSAP.to(this.entryScreen, {
+            opacity: 0,
+            duration: 0.2,
+            ease: "power1.out",
+            onComplete: () => {
+                this.entryScreen.classList.add("hidden");
+            },
+        });
+    }
+
+    tryStartIntro() {
+        if (!this.worldReady || !this.entered || this.introStarted) {
+            return;
+        }
+
+        this.introStarted = true;
+        this.playIntro();
     }
 
     playLoaderDots() {
