@@ -15,6 +15,9 @@ total under about 300 KB and the music at or below 1.2 MB.
 |---|---|---|---|---|---|
 | music | music-main.webm + music-main.mp3 | warm lo-fi keys, soft bass, brushed beat, vinyl texture, no vocals, loops seamlessly | 48s loop, <=1.2MB | Original synthesis (this project) | CC0 |
 | ambience-night | ambience-night.mp3 | soft crickets / night air | 24s loop, <=500KB | Original synthesis (this project) | CC0 |
+| loader-dots | loader-dots.mp3 | three soft rising blips for the opening dots, short tail | 0.8s | | |
+| cube-pop | cube-pop.mp3 | soft round pop with a tiny wobble as the cube overshoots | 0.45s | | |
+| welcome-swell | welcome-swell.mp3 | one airy shimmer that swells under the welcome letters | 1.4s | | |
 | click | ui-click.mp3 | soft, dry click | <0.15s | Original synthesis (this project) | CC0 |
 | hover | ui-hover.mp3 | barely-there tick | <0.08s | Original synthesis (this project) | CC0 |
 | pop | pop.mp3 | soft marimba-like pop; one file reused at many pitches | <0.3s | Original synthesis (this project) | CC0 |
@@ -36,6 +39,9 @@ These live in `Experience/Utils/sounds.js` so they can be tuned by ear.
 |---|---|
 | music | 0.35 |
 | ambience-night | 0.15 |
+| loader-dots | 0.4 |
+| cube-pop | 0.5 |
+| welcome-swell | 0.3 |
 | click | 0.35 |
 | hover | 0.12 |
 | theme-light / theme-dark | 0.4 |

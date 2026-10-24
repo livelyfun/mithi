@@ -19,10 +19,28 @@ export default class Preloader extends EventEmitter {
             this.device = device;
         });
 
+        this.preloader = document.querySelector(".preloader");
+        this.loaderDotsPlayed = false;
+
+        this.sound.on("enable", () => this.playLoaderDots());
+
         this.world.on("worldready", () => {
             this.setAssets();
             this.playIntro();
         });
+    }
+
+    playLoaderDots() {
+        if (
+            this.loaderDotsPlayed ||
+            !this.preloader ||
+            this.preloader.classList.contains("hidden")
+        ) {
+            return;
+        }
+
+        this.loaderDotsPlayed = true;
+        this.sound.play("loader-dots", { allowLoading: true });
     }
 
     setAssets() {
@@ -58,7 +76,7 @@ export default class Preloader extends EventEmitter {
                         z: 1.4,
                         ease: "back.out(2.5)",
                         duration: 0.7,
-                        onStart: () => this.sound.play("pop", { rate: 0.7 }),
+                        onStart: () => this.sound.play("cube-pop"),
                     })
                     .to(this.room.position, {
                         x: -1,
@@ -73,7 +91,7 @@ export default class Preloader extends EventEmitter {
                         z: 1.4,
                         ease: "back.out(2.5)",
                         duration: 0.7,
-                        onStart: () => this.sound.play("pop", { rate: 0.7 }),
+                        onStart: () => this.sound.play("cube-pop"),
                     })
                     .to(this.room.position, {
                         z: -1,
@@ -86,7 +104,7 @@ export default class Preloader extends EventEmitter {
                     yPercent: 0,
                     stagger: 0.05,
                     ease: "back.out(1.7)",
-                    onStart: () => this.sound.play("whoosh-soft"),
+                    onStart: () => this.sound.play("welcome-swell"),
                 })
                 .to(
                     ".arrow-svg-wrapper",

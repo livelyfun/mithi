@@ -5,7 +5,7 @@ import { Howl, Howler } from "howler";
 import Experience from "./Experience.js";
 import sounds from "./Utils/sounds.js";
 
-const STORAGE_KEY = "sound-enabled-v2";
+const STORAGE_KEY = "sound-enabled-v3";
 const MAX_SFX = 8;
 const HOVER_QUERY = "(hover: hover) and (pointer: fine)";
 
@@ -37,13 +37,15 @@ export default class SoundManager extends EventEmitter {
             this.definitions[sound.id] = sound;
         });
 
+        this.preload(["loader-dots", "cube-pop", "welcome-swell"]);
+
         this.soundButton = document.querySelector(".sound-button");
         this.hoverMedia = window.matchMedia
             ? window.matchMedia(HOVER_QUERY)
             : null;
         this.canHover = this.hoverMedia ? this.hoverMedia.matches : false;
 
-        this.gestureEvents = ["pointerdown", "keydown", "wheel", "touchstart"];
+        this.gestureEvents = ["pointerdown", "keydown", "touchstart"];
         this.onFirstGesture = this.onFirstGesture.bind(this);
 
         this.updateButton();
@@ -80,6 +82,10 @@ export default class SoundManager extends EventEmitter {
 
     /* Public API --------------------------------------------------- */
 
+    isEnabled() {
+        return this.enabled;
+    }
+
     enable() {
         this.preferenceOn = true;
 
@@ -99,6 +105,7 @@ export default class SoundManager extends EventEmitter {
 
         this.startMusic();
         this.startNight();
+        this.emit("enable");
     }
 
     disable() {
@@ -119,7 +126,7 @@ export default class SoundManager extends EventEmitter {
     }
 
     play(id, options = {}) {
-        if (!this.enabled) {
+        if (!this.enabled || this.hidden) {
             return;
         }
 
@@ -205,9 +212,19 @@ export default class SoundManager extends EventEmitter {
                 this.music = this.create(definition);
             } else if (definition.group === "ambience") {
                 this.night = this.create(definition);
-            } else {
+            } else if (!this.howls[definition.id]) {
                 this.howls[definition.id] = this.create(definition);
             }
+        });
+    }
+
+    preload(ids) {
+        ids.forEach((id) => {
+            const definition = this.definitions[id];
+            if (!definition || this.howls[id] || this.failed[id]) {
+                return;
+            }
+            this.howls[id] = this.create(definition);
         });
     }
 
@@ -220,7 +237,10 @@ export default class SoundManager extends EventEmitter {
             src: src,
             loop: Boolean(definition.loop),
             volume: definition.group === "sfx" ? definition.volume : 0,
-            pool: definition.group === "sfx" ? MAX_SFX : 1,
+            pool:
+                definition.group === "sfx"
+                    ? definition.pool || MAX_SFX
+                    : 1,
             preload: true,
             onloaderror: () => {
                 this.fail(definition.id, true);

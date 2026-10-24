@@ -15,6 +15,27 @@ export default [
         loop: true,
     },
     {
+        id: "loader-dots",
+        file: "/audio/loader-dots.mp3",
+        volume: 0.4,
+        group: "sfx",
+        pool: 1,
+    },
+    {
+        id: "cube-pop",
+        file: "/audio/cube-pop.mp3",
+        volume: 0.5,
+        group: "sfx",
+        pool: 1,
+    },
+    {
+        id: "welcome-swell",
+        file: "/audio/welcome-swell.mp3",
+        volume: 0.3,
+        group: "sfx",
+        pool: 1,
+    },
+    {
         id: "click",
         file: "/audio/ui-click.mp3",
         volume: 0.35,
