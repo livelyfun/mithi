@@ -86,6 +86,19 @@ export default class SoundManager extends EventEmitter {
         return this.enabled;
     }
 
+    attemptAutoplay() {
+        // Some browsers allow audible autoplay (for example, when the
+        // visitor has allowed it for this site). In that case start
+        // immediately instead of waiting for the first gesture.
+        if (!this.preferenceOn || this.enabled) {
+            return;
+        }
+
+        if (Howler.ctx && Howler.ctx.state === "running") {
+            this.enable();
+        }
+    }
+
     enable() {
         this.preferenceOn = true;
 

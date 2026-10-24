@@ -23,6 +23,7 @@ export default class Preloader extends EventEmitter {
         this.loaderDotsPlayed = false;
 
         this.sound.on("enable", () => this.playLoaderDots());
+        this.sound.attemptAutoplay();
 
         this.world.on("worldready", () => {
             this.setAssets();
