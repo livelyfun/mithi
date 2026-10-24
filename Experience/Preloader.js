@@ -13,6 +13,9 @@ export default class Preloader extends EventEmitter {
         this.camera = this.experience.camera;
         this.world = this.experience.world;
         this.device = this.sizes.device;
+        this.sound = this.experience.sound;
+        this.loading = document.querySelector(".loading");
+        this.gate = document.querySelector(".sound-gate");
 
         this.sizes.on("switchdevice", (device) => {
             this.device = device;
@@ -20,7 +23,7 @@ export default class Preloader extends EventEmitter {
 
         this.world.on("worldready", () => {
             this.setAssets();
-            this.playIntro();
+            this.showGate();
         });
     }
 
@@ -34,6 +37,62 @@ export default class Preloader extends EventEmitter {
         this.room = this.experience.world.room.actualRoom;
         this.roomChildren = this.experience.world.room.roomChildren;
         console.log(this.roomChildren);
+    }
+
+    showGate() {
+        if (!this.gate) {
+            this.playIntro();
+            return;
+        }
+
+        if (this.loading) {
+            this.loading.classList.add("hidden");
+        }
+        this.gate.classList.remove("hidden");
+        this.selectGateChoice();
+
+        this.gateClick = this.onGateClick.bind(this);
+        this.gate.addEventListener("click", this.gateClick);
+    }
+
+    selectGateChoice() {
+        const stored = this.sound.getStoredPreference();
+        let focused = null;
+
+        this.gate.querySelectorAll(".gate-button").forEach((button) => {
+            const value = button.dataset.sound === "on";
+            const selected = stored !== null && value === stored;
+            button.classList.toggle("selected", selected);
+            if (selected) {
+                focused = button;
+            }
+        });
+
+        if (!focused) {
+            focused = this.gate.querySelector(".gate-button");
+        }
+        if (focused) {
+            focused.focus({ preventScroll: true });
+        }
+    }
+
+    onGateClick(event) {
+        const button = event.target.closest(".gate-button");
+        if (!button) {
+            return;
+        }
+
+        this.gate.removeEventListener("click", this.gateClick);
+
+        if (button.dataset.sound === "on") {
+            this.sound.enable();
+            this.sound.play("click", { allowLoading: true });
+        } else {
+            this.sound.disable();
+        }
+
+        this.gate.classList.add("hidden");
+        this.playIntro();
     }
 
     firstIntro() {
@@ -57,6 +116,7 @@ export default class Preloader extends EventEmitter {
                         z: 1.4,
                         ease: "back.out(2.5)",
                         duration: 0.7,
+                        onStart: () => this.sound.play("pop", { rate: 0.7 }),
                     })
                     .to(this.room.position, {
                         x: -1,
@@ -71,6 +131,7 @@ export default class Preloader extends EventEmitter {
                         z: 1.4,
                         ease: "back.out(2.5)",
                         duration: 0.7,
+                        onStart: () => this.sound.play("pop", { rate: 0.7 }),
                     })
                     .to(this.room.position, {
                         z: -1,
@@ -83,6 +144,7 @@ export default class Preloader extends EventEmitter {
                     yPercent: 0,
                     stagger: 0.05,
                     ease: "back.out(1.7)",
+                    onStart: () => this.sound.play("whoosh-soft"),
                 })
                 .to(
                     ".arrow-svg-wrapper",
@@ -107,6 +169,7 @@ export default class Preloader extends EventEmitter {
             this.secondTimeline = new GSAP.timeline();
 
             this.secondTimeline
+                .call(() => this.sound.play("whoosh-big"))
                 .to(
                     ".intro-text .animatedis",
                     {
@@ -180,6 +243,11 @@ export default class Preloader extends EventEmitter {
                     },
                     "introtext"
                 )
+                .call(
+                    () => this.sound.play("whoosh-soft"),
+                    null,
+                    "introtext"
+                )
                 .to(
                     ".hero-main-title .animatedis",
                     {
@@ -224,6 +292,7 @@ export default class Preloader extends EventEmitter {
                         z: 1,
                         ease: "back.out(2.2)",
                         duration: 0.5,
+                        onStart: () => this.sound.play("water-bloop"),
                     },
                     ">-0.5"
                 )
@@ -235,6 +304,7 @@ export default class Preloader extends EventEmitter {
                         z: 1,
                         ease: "back.out(2.2)",
                         duration: 0.5,
+                        onStart: () => this.sound.play("pop", { rate: 0.9 }),
                     },
                     ">-0.4"
                 )
@@ -246,6 +316,7 @@ export default class Preloader extends EventEmitter {
                         z: 1,
                         ease: "back.out(2.2)",
                         duration: 0.5,
+                        onStart: () => this.sound.play("pop", { rate: 1 }),
                     },
                     ">-0.3"
                 )
@@ -257,6 +328,7 @@ export default class Preloader extends EventEmitter {
                         z: 1,
                         ease: "back.out(2.2)",
                         duration: 0.5,
+                        onStart: () => this.sound.play("pop", { rate: 1.12 }),
                     },
                     ">-0.2"
                 )
@@ -268,6 +340,7 @@ export default class Preloader extends EventEmitter {
                         z: 1,
                         ease: "back.out(2.2)",
                         duration: 0.5,
+                        onStart: () => this.sound.play("pop", { rate: 1.26 }),
                     },
                     ">-0.1"
                 )
@@ -279,6 +352,7 @@ export default class Preloader extends EventEmitter {
                         z: 1,
                         ease: "back.out(2.2)",
                         duration: 0.5,
+                        onStart: () => this.sound.play("pop", { rate: 1.4 }),
                     },
                     ">-0.1"
                 )
@@ -288,6 +362,7 @@ export default class Preloader extends EventEmitter {
                     z: 1,
                     ease: "back.out(2.2)",
                     duration: 0.5,
+                    onStart: () => this.sound.play("power-on"),
                 })
                 .set(this.roomChildren.mini_floor.scale, {
                     x: 1,
@@ -322,6 +397,7 @@ export default class Preloader extends EventEmitter {
                         y: 4 * Math.PI + Math.PI / 4,
                         ease: "power2.out",
                         duration: 1,
+                        onStart: () => this.sound.play("chair-spin"),
                     },
                     "chair"
                 )
@@ -375,6 +451,7 @@ export default class Preloader extends EventEmitter {
         this.moveFlag = false;
         await this.secondIntro();
         this.scaleFlag = false;
+        this.sound.play("ding", { volume: 0.5 });
         this.emit("enablecontrols");
     }
 
