@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, target-densityDpi=device-dpi, minimal-ui' />
+    <title>Mithlesh Kumar Das — Backend &amp; Full-Stack Developer</title>
+    <meta name="description" content="3D room portfolio of Mithlesh Kumar Das, a backend and full-stack developer from Biratnagar, Nepal, building with Python, React, Next.js, Firebase and REST/GraphQL APIs." />
+    <meta name="author" content="Mithlesh Kumar Das" />
+    <meta name="theme-color" content="#FAF4E5" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Mithlesh Kumar Das — Backend &amp; Full-Stack Developer" />
+    <meta property="og:description" content="Backend and full-stack developer from Biratnagar, Nepal. Python, React, Next.js, Firebase, REST and GraphQL APIs." />
+    <meta property="og:url" content="https://3d-portfolio-black-seven.vercel.app/" />
+    <meta property="og:image" content="https://3d-portfolio-black-seven.vercel.app/images/profile.jpg" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Mithlesh Kumar Das — Backend &amp; Full-Stack Developer" />
+    <meta name="twitter:description" content="Backend and full-stack developer from Biratnagar, Nepal. Python, React, Next.js, Firebase, REST and GraphQL APIs." />
+    <meta name="twitter:image" content="https://3d-portfolio-black-seven.vercel.app/images/profile.jpg" />
+  </head>
+  <body class="light-theme">
+    <div class="experience">
+      <canvas class="experience-canvas"></canvas>
+    </div>
+
+    <!-- Preloader -->
+    <div class="preloader">
+      <div class="preloader-wrapper">
+        <div class="loading">
+          <div class="circle"></div>
+          <div class="circle"></div>
+          <div class="circle"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="page" asscroll-container>
+
+      <div class="toggle-bar">
+        <div class="sun-wrapper">
+          <svg xmlns="http://www.w3.org/2000/svg" height="24" width="24"><path fill="currentColor" d="M12 5Q11.575 5 11.288 4.712Q11 4.425 11 4V2Q11 1.575 11.288 1.287Q11.575 1 12 1Q12.425 1 12.713 1.287Q13 1.575 13 2V4Q13 4.425 12.713 4.712Q12.425 5 12 5ZM16.95 7.05Q16.675 6.775 16.675 6.362Q16.675 5.95 16.95 5.65L18.35 4.225Q18.65 3.925 19.062 3.925Q19.475 3.925 19.775 4.225Q20.05 4.5 20.05 4.925Q20.05 5.35 19.775 5.625L18.35 7.05Q18.075 7.325 17.65 7.325Q17.225 7.325 16.95 7.05ZM20 13Q19.575 13 19.288 12.712Q19 12.425 19 12Q19 11.575 19.288 11.287Q19.575 11 20 11H22Q22.425 11 22.712 11.287Q23 11.575 23 12Q23 12.425 22.712 12.712Q22.425 13 22 13ZM12 23Q11.575 23 11.288 22.712Q11 22.425 11 22V20Q11 19.575 11.288 19.288Q11.575 19 12 19Q12.425 19 12.713 19.288Q13 19.575 13 20V22Q13 22.425 12.713 22.712Q12.425 23 12 23ZM5.65 7.05 4.225 5.65Q3.925 5.35 3.925 4.925Q3.925 4.5 4.225 4.225Q4.5 3.95 4.925 3.95Q5.35 3.95 5.625 4.225L7.05 5.65Q7.325 5.925 7.325 6.35Q7.325 6.775 7.05 7.05Q6.75 7.325 6.35 7.325Q5.95 7.325 5.65 7.05ZM18.35 19.775 16.95 18.35Q16.675 18.05 16.675 17.638Q16.675 17.225 16.95 16.95Q17.225 16.675 17.638 16.675Q18.05 16.675 18.35 16.95L19.775 18.35Q20.075 18.625 20.062 19.05Q20.05 19.475 19.775 19.775Q19.475 20.075 19.05 20.075Q18.625 20.075 18.35 19.775ZM2 13Q1.575 13 1.288 12.712Q1 12.425 1 12Q1 11.575 1.288 11.287Q1.575 11 2 11H4Q4.425 11 4.713 11.287Q5 11.575 5 12Q5 12.425 4.713 12.712Q4.425 13 4 13ZM4.225 19.775Q3.95 19.5 3.95 19.075Q3.95 18.65 4.225 18.375L5.65 16.95Q5.925 16.675 6.338 16.675Q6.75 16.675 7.05 16.95Q7.35 17.25 7.35 17.663Q7.35 18.075 7.05 18.375L5.65 19.775Q5.35 20.075 4.925 20.075Q4.5 20.075 4.225 19.775ZM12 18Q9.5 18 7.75 16.25Q6 14.5 6 12Q6 9.5 7.75 7.75Q9.5 6 12 6Q14.5 6 16.25 7.75Q18 9.5 18 12Q18 14.5 16.25 16.25Q14.5 18 12 18ZM12 16Q13.65 16 14.825 14.825Q16 13.65 16 12Q16 10.35 14.825 9.175Q13.65 8 12 8Q10.35 8 9.175 9.175Q8 10.35 8 12Q8 13.65 9.175 14.825Q10.35 16 12 16Z"/></svg>
+        </div>
+        <button class="toggle-button" aria-label="Toggle dark mode">
+          <div class="toggle-circle"></div>
+        </button>
+        <div class="moon-wrapper">
+          <svg xmlns="http://www.w3.org/2000/svg" height="24" width="24"><path fill="currentColor" d="M12 21Q8.25 21 5.625 18.375Q3 15.75 3 12Q3 8.25 5.625 5.625Q8.25 3 12 3Q12.35 3 12.688 3.025Q13.025 3.05 13.35 3.1Q12.325 3.825 11.713 4.987Q11.1 6.15 11.1 7.5Q11.1 9.75 12.675 11.325Q14.25 12.9 16.5 12.9Q17.875 12.9 19.025 12.287Q20.175 11.675 20.9 10.65Q20.95 10.975 20.975 11.312Q21 11.65 21 12Q21 15.75 18.375 18.375Q15.75 21 12 21ZM12 19Q14.2 19 15.95 17.788Q17.7 16.575 18.5 14.625Q18 14.75 17.5 14.825Q17 14.9 16.5 14.9Q13.425 14.9 11.262 12.738Q9.1 10.575 9.1 7.5Q9.1 7 9.175 6.5Q9.25 6 9.375 5.5Q7.425 6.3 6.213 8.05Q5 9.8 5 12Q5 14.9 7.05 16.95Q9.1 19 12 19ZM11.75 12.25Q11.75 12.25 11.75 12.25Q11.75 12.25 11.75 12.25Q11.75 12.25 11.75 12.25Q11.75 12.25 11.75 12.25Q11.75 12.25 11.75 12.25Q11.75 12.25 11.75 12.25Q11.75 12.25 11.75 12.25Q11.75 12.25 11.75 12.25Q11.75 12.25 11.75 12.25Q11.75 12.25 11.75 12.25Q11.75 12.25 11.75 12.25Q11.75 12.25 11.75 12.25Q11.75 12.25 11.75 12.25Z"/></svg>
+        </div>
+      </div>
+
+      <div class="page-wrapper" asscroll>
+        <section class="hero">
+          <div class="hero-wrapper">
+
+            <!-- Intro Stuff -->
+            <div class="intro-text">Welcome to my portfolio!</div>
+            <div class="arrow-svg-wrapper">
+              <svg xmlns="http://www.w3.org/2000/svg" height="24" width="24"><path fill="currentColor" d="M12 14.95q-.2 0-.375-.063-.175-.062-.325-.212L6.675 10.05q-.275-.275-.262-.688.012-.412.287-.687.275-.275.7-.275.425 0 .7.275l3.9 3.9 3.925-3.925q.275-.275.688-.263.412.013.687.288.275.275.275.7 0 .425-.275.7l-4.6 4.6q-.15.15-.325.212-.175.063-.375.063Z"/></svg>
+            </div>
+
+            <div class="hero-main">
+              <h1 class="hero-main-title">Mithlesh Kumar Das</h1>
+              <p class="hero-main-description">Backend &amp; Full-Stack Developer</p>
+            </div>
+
+            <div class="hero-second">
+              <p class="hero-second-subheading first-sub">Mithlesh Kumar Das</p>
+              <p class="hero-second-subheading second-sub">Portfolio</p>
+            </div>
+
+          </div>
+        </section>
+
+        <div class="first-move section-margin"></div>
+
+        <section class="first-section section left">
+          <div class="progress-wrapper progress-bar-wrapper-left">
+            <div class="progress-bar"></div>
+          </div>
+
+          <div class="section-intro-wrapper">
+            <h1 class="section-title">
+              <span class="section-title-text">About Me</span>
+              <div class="section-title-decoration styleOne"></div>
+              <div class="section-title-decoration styleTwo"></div>
+              <div class="section-title-decoration styleThree"></div>
+            </h1>
+            <span class="section-number">01</span>
+          </div>
+
+          <div class="section-detail-wrapper">
+            <p class="section-text">My name is Mithlesh Kumar Das and I am an entry-level backend and full-stack developer from Biratnagar, Nepal. I am currently studying Information Technology at Mahendra Morang Adarsh Multiple Campus, and I focus on the part of the stack where correctness matters: APIs, data models, authentication, realtime delivery and the pipelines that ship them.</p>
+            <p class="section-text">Most of what I know, I learned by building and shipping — a scientific calculator with a hand-written expression engine, a real-time stock terminal with WebSocket streaming and JWT auth, an Electron downloader, and a CLI that tidies your Downloads folder. Each one taught me something the tutorials did not, especially how much breaks when a real user touches your code.</p>
+            <p class="section-text">I work in Git and GitHub as a first habit, write tests where the logic is worth protecting, and treat CI/CD and Docker as part of the work rather than an afterthought.</p>
+            <p class="section-text">I am always looking for an opportunity to learn, collaborate with other developers and contribute to real products. If you are building something where reliable backend work matters, I would love to hear about it.</p>
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <h1 id="education">EDUCATION</h1>
+            <br />
+            <br />
+            <br />
+            <h3><a href="https://mmamc.edu.np/" target="_blank" rel="noreferrer">Mahendra Morang Adarsh Multiple Campus</a></h3>
+            <p class="section-text"><strong>Bachelor of Information Technology</strong></p>
+            <p class="section-text">Biratnagar, Nepal</p>
+            <p class="section-text">[ 2024 — Present ] &nbsp;·&nbsp; In progress</p>
+            <p class="section-text">Coursework covers programming, data structures, databases, web technologies and software engineering, with hands-on work in Python, JavaScript, REST and GraphQL APIs, Firebase and containerised deployment.</p>
+            <br />
+            <br />
+            <h3>Shikshadeep Secondary Boarding School</h3>
+            <p class="section-text"><strong>Higher Secondary (Grade 12)</strong> &nbsp;·&nbsp; GPA 2.95</p>
+            <p class="section-text">Biratnagar, Nepal &nbsp;·&nbsp; Completed</p>
+            <br />
+            <h3>Shikshadeep Secondary Boarding School</h3>
+            <p class="section-text"><strong>Secondary (Grade 10)</strong> &nbsp;·&nbsp; GPA 3.90</p>
+            <p class="section-text">Biratnagar, Nepal &nbsp;·&nbsp; Completed</p>
+          </div>
+        </section>
+
+        <div class="second-move section-margin"></div>
+
+        <section class="second-section section right">
+          <div class="progress-wrapper progress-bar-wrapper-right">
+            <div class="progress-bar blue-background"></div>
+          </div>
+
+          <div class="section-intro-wrapper blue-text blue-border">
+            <h1 class="section-title blue-text blue-border">
+              <span class="section-title-text blue-text">My Projects</span>
+              <div class="section-title-decoration styleOne blue-border"></div>
+              <div class="section-title-decoration styleTwo blue-border"></div>
+              <div class="section-title-decoration styleThree blue-background blue-border"></div>
+            </h1>
+            <span class="section-number blue-text">02</span>
+          </div>
+
+          <div class="section-detail-wrapper">
+            <h3 class="section-heading">StockMatrix — real-time stock terminal</h3>
+            <p class="section-text">A full-stack trading dashboard covering NASDAQ, NYSE, NSE, BSE, LSE, Euronext, Tokyo and HKEX. A FastAPI backend issues OAuth2 / JWT auth, caches Yahoo Finance data in memory with TTL, and broadcasts price updates over per-user WebSocket connections. The React + TypeScript frontend renders SVG candlestick charts with OHLC crosshairs, evaluates price alerts in the background and fires browser toasts.</p>
+            <p class="section-text"><strong>Stack:</strong> Python · FastAPI · SQLAlchemy · Alembic · WebSockets · Redis · Docker · React · TypeScript · Tailwind CSS</p>
+            <picture><img src="/images/stockmatrix.jpg" width="500" loading="lazy" alt="StockMatrix real-time stock terminal dashboard" /></picture>
+            <p class="project-links"><a href="https://github.com/livelyfun/Track-the-stock-market" target="_blank" rel="noreferrer">Source code ↗</a></p>
+
+            <h3 class="section-heading">Kira Calculator — scientific desktop calculator</h3>
+            <p class="section-text">A cross-platform calculator where the interesting work is the math, not the chrome. I wrote the expression parser and evaluator to handle operator precedence, nested parentheses, powers, square roots, trigonometric functions, logarithms and the constants π and e, then covered it with an automated pytest suite. The PySide6 interface is split into calculator, converter and programmer pages with a custom QSS stylesheet.</p>
+            <p class="section-text"><strong>Stack:</strong> Python · PySide6 · pytest · Qt Style Sheets</p>
+            <picture><img src="/images/kira-calculator.jpg" width="500" loading="lazy" alt="Kira Calculator scientific desktop calculator" /></picture>
+            <p class="project-links"><a href="https://github.com/livelyfun/kira-calculator" target="_blank" rel="noreferrer">Source code ↗</a></p>
+
+            <h3 class="section-heading">AI Reel Studio — prompt to short-form video</h3>
+            <p class="section-text">An end-to-end automated video generator. One prompt drives a Gemini service that produces a storyboard, orchestrates visual asset generation, synthesises audio, aligns captions and assembles the pieces into a structured reel. It includes a storyboard viewer, generation progress view, reel player and per-platform metadata for Reels, Shorts and TikTok.</p>
+            <p class="section-text"><strong>Stack:</strong> TypeScript · React · Vite · Express · Gemini AI · Web Audio API</p>
+            <picture><img src="/images/ai-reel-studio.jpg" width="500" loading="lazy" alt="AI Reel Studio video generation interface" /></picture>
+            <p class="project-links"><a href="https://ai-reel-studio-eta.vercel.app/" target="_blank" rel="noreferrer">Live site ↗</a> &nbsp;·&nbsp; <a href="https://github.com/livelyfun/AI-Reel-Studio" target="_blank" rel="noreferrer">Source code ↗</a></p>
+
+            <h3 class="section-heading">YT Downloader — local Electron downloader</h3>
+            <p class="section-text">A desktop downloader that keeps everything on the machine. A React renderer drives an Electron main process that shells out to yt-dlp and ffmpeg, parsing their output for live progress, speed and ETA. It detects missing dependencies on launch, stores its config and download history under ~/.config, and ships as a standard .deb package with a .desktop entry.</p>
+            <p class="section-text"><strong>Stack:</strong> JavaScript · Electron · React · Vite · Tailwind CSS · yt-dlp · ffmpeg</p>
+            <p class="project-links"><a href="https://github.com/livelyfun/youtube-video-downloader" target="_blank" rel="noreferrer">Source code ↗</a></p>
+
+            <h3 class="section-heading">Smart File Organizer — CLI that tidies Downloads</h3>
+            <p class="section-text">A small, dependable utility: install once, and everything that lands in Downloads gets filed into Images, Videos, PDFs, Documents, Archives, Code and more. It ships self-contained executables for Linux, macOS and Windows, and the install scripts verify the download against a published SHA-256 before running anything. The Python package is pytest-covered and built through pyproject.toml.</p>
+            <p class="section-text"><strong>Stack:</strong> Python · pytest · pyproject.toml · Shell · PowerShell · Inno Setup</p>
+            <picture><img src="/images/smart-file-organizer.jpg" width="500" loading="lazy" alt="Smart File Organizer command line output" /></picture>
+            <p class="project-links"><a href="https://github.com/livelyfun/Smart-File-Organizer-CLI" target="_blank" rel="noreferrer">Source code ↗</a></p>
+
+            <h3 class="section-heading">MPM Services — Melbourne property website</h3>
+            <p class="section-text">A marketing site for a family-owned steam cleaning, strip &amp; polish and property-maintenance business in Melbourne. Built as a dependency-light site on Vite with vanilla ES modules, a hash-based router and a custom CSS design-token system, so the client gets something fast and maintainable without a framework runtime to carry.</p>
+            <p class="section-text"><strong>Stack:</strong> JavaScript · Vite · CSS Design Tokens · ES Modules</p>
+            <picture><img src="/images/mpm-services.jpg" width="500" loading="lazy" alt="MPM Services property management website" /></picture>
+            <p class="project-links"><a href="https://mpm-services.vercel.app/" target="_blank" rel="noreferrer">Live site ↗</a> &nbsp;·&nbsp; <a href="https://github.com/livelyfun/Melbourne-Property-Management-and-Services-Australia" target="_blank" rel="noreferrer">Source code ↗</a></p>
+          </div>
+        </section>
+
+        <div class="third-move section-margin"></div>
+
+        <section class="third-section section left">
+          <div class="progress-wrapper progress-bar-wrapper-left">
+            <div class="progress-bar green-background"></div>
+          </div>
+
+          <div class="section-intro-wrapper green-text green-border">
+            <h1 class="section-title green-text green-border">
+              <span class="section-title-text green-text">Skills</span>
+              <div class="section-title-decoration styleOne green-border"></div>
+              <div class="section-title-decoration styleTwo green-border"></div>
+              <div class="section-title-decoration styleThree green-background green-border"></div>
+            </h1>
+            <span class="section-number green-text">03</span>
+          </div>
+
+          <div class="section-detail-wrapper">
+            <h3 class="section-heading">Languages</h3>
+            <p class="section-text">Python · JavaScript · HTML5 · CSS3</p>
+
+            <h3 class="section-heading">Frontend</h3>
+            <p class="section-text">React.js · Next.js · responsive interfaces · component-driven design</p>
+
+            <h3 class="section-heading">Backend &amp; APIs</h3>
+            <p class="section-text">REST APIs · GraphQL · Firebase (Firestore, Authentication, FCM, Cloud Storage) · Node.js (basic)</p>
+
+            <h3 class="section-heading">AI Engineering</h3>
+            <p class="section-text">Gemini API · prompt engineering · RAG fundamentals · AI-assisted workflows</p>
+
+            <h3 class="section-heading">DevOps &amp; Delivery</h3>
+            <p class="section-text">Git · GitHub · GitHub Actions · GitLab CI · Docker (basic) · Fastlane · Bitrise · Vercel</p>
+
+            <h3 class="section-heading">How I work</h3>
+            <p class="section-text">Branch per change, descriptive commits, pull requests even when working solo. Most of my repos carry GitHub Actions workflows so tests and builds run on every push instead of on my memory.</p>
+            <br />
+            <p class="section-text"><strong>Work style:</strong> problem solving · Agile / Scrum · time management · attention to detail</p>
+            <p class="section-text"><strong>Communication:</strong> technical writing · written &amp; verbal communication · stakeholder reporting</p>
+            <p class="section-text"><strong>Leadership:</strong> team collaboration · task allocation · mentorship &amp; peer coaching</p>
+            <p class="section-text"><strong>Traits:</strong> fast learner · self-motivated · adaptable · critical thinking</p>
+            <br />
+            <p class="section-text"><strong>Languages spoken:</strong> Nepali · English · Hindi · Madhesi</p>
+          </div>
+        </section>
+
+        <div class="second-move section-margin"></div>
+
+        <section class="second-section section right">
+          <div class="progress-wrapper progress-bar-wrapper-right">
+            <div class="progress-bar blue-background"></div>
+          </div>
+
+          <div class="section-intro-wrapper blue-text blue-border">
+            <h1 class="section-title blue-text blue-border">
+              <span class="section-title-text blue-text">CONTACT</span>
+              <div class="section-title-decoration styleOne blue-border"></div>
+              <div class="section-title-decoration styleTwo blue-border"></div>
+              <div class="section-title-decoration styleThree blue-background blue-border"></div>
+            </h1>
+            <span class="section-number blue-text">04</span>
+          </div>
+
+          <div class="section-detail-wrapper">
+            <h3 class="section-heading">LinkedIn</h3>
+            <p class="section-text">If you would like to get in touch, the fastest professional route is LinkedIn. I am open to internships, junior backend roles, freelance work and conversations about APIs, realtime systems and developer tooling.</p>
+            <p class="project-links"><a href="https://www.linkedin.com/in/mithlesh-das-876973343/" target="_blank" rel="noreferrer"><img src="https://img.shields.io/badge/LinkedIn-%230077B5.svg?logo=linkedin&amp;logoColor=white" alt="LinkedIn" /></a></p>
+
+            <h3 class="section-heading">GitHub</h3>
+            <p class="section-text">Every project on this page has its source on GitHub. I use it as my working notebook: branches, pull requests, Actions workflows and public builds. If you want to see how something is put together, the code is the best place to start.</p>
+            <p class="project-links"><a href="https://github.com/livelyfun" target="_blank" rel="noreferrer"><img src="https://img.shields.io/badge/Github-12100E?logo=github&amp;logoColor=white" alt="GitHub" /></a></p>
+
+            <h3 class="section-heading">Email &amp; phone</h3>
+            <p class="section-text">Email is the most reliable way to reach me. I read everything.</p>
+            <p class="section-text"><a href="mailto:mithleshkumardas527@gmail.com">mithleshkumardas527@gmail.com</a></p>
+            <p class="section-text"><a href="tel:+9779703817024">+977-9703817024</a> &nbsp;·&nbsp; Nepal time, UTC+5:45</p>
+            <p class="project-links"><a href="mailto:mithleshkumardas527@gmail.com"><img src="https://img.shields.io/badge/Email-D14836?logo=gmail&amp;logoColor=white" alt="Email" /></a></p>
+
+            <h3 class="section-heading">Location</h3>
+            <p class="section-text">Biratnagar, Province 1, Nepal<br />Working hours: 10:00 – 18:00 NPT (UTC+5:45)</p>
+
+            <h3 class="section-heading">Résumé</h3>
+            <p class="section-text">Prefer the one-page version? Download my CV as a PDF.</p>
+            <p class="project-links"><a href="/Mithlesh_Kumar_Das_CV.pdf" target="_blank" rel="noreferrer"><img src="https://img.shields.io/badge/Download_CV-PDF-333332?logo=adobeacrobatreader&amp;logoColor=white" alt="Download CV" /></a></p>
+          </div>
+        </section>
+
+        <footer class="footer">
+          <span class="footer__copyright">Copyright &copy; 2026 — Mithlesh Kumar Das</span>
+        </footer>
+        <br /><br />
+
+      </div>
+    </div>
+    <script type="module" src="/main.js"></script>
+  </body>
+</html>
