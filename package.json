@@ -1,35 +1,19 @@
 {
-  "name": "portfolio",
-  "version": "0.1.0",
+  "name": "mithlesh-kumar-das-portfolio",
   "private": true,
+  "version": "1.0.0",
+  "description": "3D room portfolio of Mithlesh Kumar Das — backend and full-stack developer.",
   "scripts": {
-    "dev": "next dev -p 3000 -H 0.0.0.0",
-    "build": "next build",
-    "start": "next start",
-    "lint": "eslint",
-    "typecheck": "tsc --noEmit"
-  },
-  "dependencies": {
-    "@types/three": "^0.186.0",
-    "framer-motion": "^13.1.1",
-    "gsap": "^3.15.0",
-    "lenis": "^1.3.27",
-    "lucide-react": "^1.37.0",
-    "motion": "^13.4.5",
-    "next": "15.5.24",
-    "react": "19.1.0",
-    "react-dom": "19.1.0",
-    "three": "^0.186.1"
+    "dev": "vite --host 0.0.0.0",
+    "build": "vite build",
+    "preview": "vite preview --host 0.0.0.0"
   },
   "devDependencies": {
-    "@eslint/eslintrc": "^3",
-    "@tailwindcss/postcss": "^4",
-    "@types/node": "^20",
-    "@types/react": "^19",
-    "@types/react-dom": "^19",
-    "eslint": "^9",
-    "eslint-config-next": "15.5.24",
-    "tailwindcss": "^4",
-    "typescript": "^5"
+    "@ashthornton/asscroll": "^2.0.7",
+    "events": "^3.3.0",
+    "gsap": "^3.10.4",
+    "lil-gui": "^0.16.1",
+    "three": "^0.141.0",
+    "vite": "^6.0.0"
   }
 }
